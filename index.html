@@ -1,196 +1,142 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#07111f" />
-  <title>Motion Lab A2 — Prepositions of Movement</title>
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Entertainment & The Arts | Vocabulary Lab</title>
+<style>
+:root{--bg:#05060a;--card:#10131c;--card2:#171b27;--text:#f8fafc;--muted:#a8b0c0;--blue:#2478ff;--violet:#8b5cf6;--green:#25d07f;--red:#ff4d61;--line:#282e3d}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:radial-gradient(circle at 80% 0,#17132e 0,transparent 32%),var(--bg);color:var(--text);min-height:100vh}
+.wrap{max-width:1180px;margin:auto;padding:28px 18px 60px}.hero{padding:32px;border:1px solid var(--line);border-radius:28px;background:linear-gradient(135deg,#111522,#0b0d14);display:grid;grid-template-columns:1fr auto;gap:20px;align-items:center}
+.badge{display:inline-block;padding:7px 12px;border-radius:999px;background:#222743;color:#c9d7ff;font-size:12px;font-weight:800;letter-spacing:.1em}.hero h1{font-size:clamp(32px,6vw,64px);line-height:.95;margin:14px 0}.grad{background:linear-gradient(90deg,#53a1ff,#a879ff);-webkit-background-clip:text;color:transparent}.hero p{color:var(--muted);max-width:650px;font-size:17px}.stat{font-size:48px;font-weight:900;text-align:center}.stat small{display:block;font-size:12px;color:var(--muted)}
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0}.tabs button,.btn{border:1px solid var(--line);background:var(--card);color:var(--text);padding:12px 17px;border-radius:14px;font-weight:800;cursor:pointer}.tabs button.active,.btn.primary{background:linear-gradient(90deg,var(--blue),var(--violet));border:0}.panel{display:none}.panel.active{display:block}.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}input,select{background:var(--card);border:1px solid var(--line);color:var(--text);border-radius:13px;padding:13px;font-size:16px}#search{flex:1;min-width:220px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:14px}.card{background:linear-gradient(145deg,var(--card2),var(--card));border:1px solid var(--line);border-radius:20px;padding:19px;min-height:185px;position:relative}.icon{font-size:32px}.word{font-size:22px;font-weight:900;margin:10px 0 3px}.cat{color:#82aaff;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.1em}.translation{color:#d6c6ff;font-weight:700;margin:9px 0}.example{color:var(--muted);font-size:14px;line-height:1.45}.quiz{max-width:760px;margin:auto;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:26px}.quizword{font-size:38px;font-weight:900;margin:14px 0}.options{display:grid;grid-template-columns:1fr 1fr;gap:12px}.option{min-height:60px;text-align:left}.correct{border-color:var(--green)!important;background:#0d2a20!important}.wrong{border-color:var(--red)!important;background:#2a1116!important}.feedback{min-height:30px;margin:15px 0;font-weight:800}.progress{height:8px;background:#202534;border-radius:99px;overflow:hidden}.progress>div{height:100%;background:linear-gradient(90deg,var(--blue),var(--violet));width:0}.matchbox{text-align:center}.prompt{font-size:30px;font-weight:900;margin:22px 0}.footer{color:var(--muted);text-align:center;margin-top:36px;font-size:13px}
+@media(max-width:650px){.hero{grid-template-columns:1fr}.stat{text-align:left}.options{grid-template-columns:1fr}.hero{padding:24px}.quiz{padding:18px}}
+</style>
 </head>
-<body>
-  <div class="bg-grid"></div>
-  <div class="orb orb-a"></div>
-  <div class="orb orb-b"></div>
-
-  <main class="app-shell">
-    <header class="topbar glass">
-      <div>
-        <div class="eyebrow">A2 • UNIVERSITY ENGLISH</div>
-        <h1>MOTION <span>LAB</span></h1>
-        <p>Prepositions of Movement</p>
-      </div>
-
-      <div class="top-actions">
-        <button id="soundBtn" class="icon-btn" aria-label="Toggle sound">🔊</button>
-        <div class="score-pill">
-          <small>SCORE</small>
-          <strong id="score">0</strong>
-        </div>
-      </div>
-    </header>
-
-    <nav class="stage-nav glass" aria-label="Activity stages">
-      <button class="stage-btn active" data-stage="explore">
-        <span>01</span>
-        <b>Explore</b>
-      </button>
-      <button class="stage-btn" data-stage="challenge">
-        <span>02</span>
-        <b>Challenge</b>
-      </button>
-      <button class="stage-btn" data-stage="mission">
-        <span>03</span>
-        <b>Final Mission</b>
-      </button>
-    </nav>
-
-    <section id="stage-explore" class="stage active">
-      <div class="section-head">
-        <div>
-          <div class="kicker">STAGE 1 • VISUAL DISCOVERY</div>
-          <h2>Move it. See it. Say it.</h2>
-          <p>Choose a preposition, watch the motion, then say the sentence aloud.</p>
-        </div>
-        <div class="progress-chip">9 movement words</div>
-      </div>
-
-      <div class="explore-grid">
-        <aside class="word-panel glass">
-          <h3>Choose a movement</h3>
-          <div id="prepButtons" class="prep-grid"></div>
-
-          <div class="sentence-card">
-            <small>MODEL SENTENCE</small>
-            <p id="modelSentence">The cube is moving through the tunnel.</p>
-          </div>
-
-          <div class="speaking-card">
-            <span>🎙️</span>
-            <div>
-              <strong>Speaking Boost</strong>
-              <p>Add a real place on campus. Example: “The student is walking through the library.”</p>
-            </div>
-          </div>
-        </aside>
-
-        <div class="motion-panel glass">
-          <div class="motion-top">
-            <div>
-              <small>LIVE MOTION</small>
-              <h3 id="motionTitle">THROUGH</h3>
-            </div>
-            <div class="status-dot"><i></i> animated</div>
-          </div>
-
-          <div id="motionStage" class="motion-stage" data-prep="through">
-            <div class="scene-label">Watch the neon cube move.</div>
-
-            <div class="tunnel"></div>
-            <div class="obstacle">OBSTACLE</div>
-            <div class="target">TARGET</div>
-            <div class="point point-a">A</div>
-            <div class="point point-b">B</div>
-
-            <div id="cube" class="cube">
-              <div class="cube-top"></div>
-              <span>GO</span>
-            </div>
-          </div>
-
-          <div class="reference-row">
-            <button id="toggleReference" class="secondary-btn">View source image</button>
-            <span>Original vocabulary reference</span>
-          </div>
-
-          <div id="referenceWrap" class="reference-wrap hidden">
-            <img src="assets/reference-vocabulary.png" alt="Original vocabulary reference" />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="stage-challenge" class="stage">
-      <div class="section-head">
-        <div>
-          <div class="kicker">STAGE 2 • QUICK REACTION</div>
-          <h2>Choose the best movement preposition.</h2>
-          <p>Read the context carefully. Every correct answer earns 100 points.</p>
-        </div>
-        <div id="challengeProgress" class="progress-chip">Question 1 / 6</div>
-      </div>
-
-      <div class="challenge-card glass">
-        <div class="question-number" id="questionNumber">QUESTION 1</div>
-        <h3 id="questionText">The cyclist is riding ___ the tunnel.</h3>
-
-        <div id="answerButtons" class="answer-grid"></div>
-        <div id="feedback" class="feedback" aria-live="polite"></div>
-
-        <div class="challenge-meter">
-          <div id="meterFill"></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="stage-mission" class="stage">
-      <div class="section-head">
-        <div>
-          <div class="kicker">STAGE 3 • FINAL MISSION</div>
-          <h2>Campus Navigation Challenge</h2>
-          <p>Complete the route, then use the speaking frame with a partner.</p>
-        </div>
-        <div class="progress-chip mission-chip">Mission mode</div>
-      </div>
-
-      <div class="mission-grid">
-        <div class="route-card glass">
-          <div class="route-title">
-            <span>📍</span>
-            <div>
-              <small>MISSION</small>
-              <h3>Get to the Media Lab</h3>
-            </div>
-          </div>
-
-          <div id="routeSteps" class="route-steps"></div>
-
-          <button id="checkRouteBtn" class="primary-btn">CHECK MY ROUTE</button>
-          <div id="routeFeedback" class="feedback"></div>
-        </div>
-
-        <aside class="speaking-mission glass">
-          <div class="mission-badge">SPEAKING BOOST</div>
-          <h3>Give campus directions</h3>
-          <p>In pairs, give directions from one place on campus to another.</p>
-
-          <div class="rule">
-            <b>Use at least 4 movement prepositions.</b>
-          </div>
-
-          <div class="sentence-frame">
-            <small>SENTENCE FRAME</small>
-            <p>“Start <b>from</b> ____. Then go <b>through</b> ____. Walk <b>past</b> ____. Finally, go <b>into</b> ____.”</p>
-          </div>
-
-          <div class="role-play">
-            <strong>Challenge Mode</strong>
-            <ol>
-              <li>Student A gives directions.</li>
-              <li>Student B visualizes the route.</li>
-              <li>Switch roles.</li>
-            </ol>
-          </div>
-        </aside>
-      </div>
-    </section>
-
-    <footer>
-      Motion Lab A2 • Built for classroom projection, laptops and mobile devices.
-    </footer>
-  </main>
-
-  <div id="toast" class="toast"></div>
-
-  <script src="app.js"></script>
-</body>
-</html>
+<body><main class="wrap">
+<section class="hero"><div><span class="badge">UNIT 9 · VOCABULARY</span><h1>Entertainment <span class="grad">& The Arts</span></h1><p>Interactive vocabulary lab: study the key words, see their Spanish meaning, and test yourself with randomized practice.</p></div><div class="stat" id="count">0<small>VOCABULARY ITEMS</small></div></section>
+<nav class="tabs"><button class="active" data-tab="study">📚 Study</button><button data-tab="quiz">🎯 Multiple Choice</button><button data-tab="write">✍️ Type It</button></nav>
+<section id="study" class="panel active"><div class="toolbar"><input id="search" placeholder="Search in English or Spanish…"><select id="filter"><option value="all">All categories</option><option>People</option><option>Theatre</option><option>Visual Arts</option><option>Film & TV</option><option>Adjectives</option><option>Word Forms</option><option>Expressions</option></select></div><div class="grid" id="cards"></div></section>
+<section id="quiz" class="panel"><div class="quiz"><div class="progress"><div id="bar"></div></div><p id="qnum" class="cat"></p><div class="quizword" id="qword"></div><p class="example" id="qexample"></p><div class="options" id="options"></div><div class="feedback" id="feedback"></div><button class="btn primary" id="next">Next question →</button></div></section>
+<section id="write" class="panel"><div class="quiz matchbox"><div class="cat">SPANISH → ENGLISH</div><div class="prompt" id="wprompt"></div><p class="example" id="wexample"></p><input id="winput" autocomplete="off" placeholder="Type the English word…" style="width:100%;margin:15px 0"><div class="feedback" id="wfeedback"></div><button class="btn primary" id="check">Check answer</button> <button class="btn" id="another">Another word</button></div></section>
+<div class="footer">Designed for vocabulary practice · Entertainment & The Arts</div>
+</main>
+<script>
+const V=[
+["choreographer","coreógrafo/a","People","💃","A choreographer designs and directs dance routines."],
+["composer","compositor/a","People","🎼","The composer wrote music for the theatrical production."],
+["conductor","director/a de orquesta","People","🎻","The conductor leads the orchestra."],
+["playwright","dramaturgo/a","People","🎭","A playwright writes plays for the theatre."],
+["scriptwriter","guionista","People","✍️","The scriptwriter creates dialogue and plots."],
+["stuntman","doble de riesgo / especialista","People","🤸","A stuntman performs risky scenes."],
+["understudy","suplente de un actor","People","🎭","The understudy can replace the main actor."],
+["vocalist","vocalista / cantante","People","🎤","The band is looking for a new vocalist."],
+["standing ovation","ovación de pie","Theatre","👏","The cast received a standing ovation."],
+["take a bow","hacer una reverencia / saludar al público","Theatre","🙇","The artists take a bow at the end."],
+["applause","aplausos","Theatre","👏","Loud applause filled the auditorium."],
+["curtain call","saludo final de los actores","Theatre","🎭","The actors returned for a curtain call."],
+["backstage","entre bastidores","Theatre","🎟️","Many people work backstage."],
+["props","utilería / accesorios de escena","Theatre","🪄","Stagehands move the props."],
+["scenery","escenografía","Theatre","🏛️","The scenery was moved on and off stage."],
+["stage fright","miedo escénico","Theatre","😰","The actress suffered from stage fright."],
+["lines","líneas / parlamentos","Theatre","💬","The actor forgot his lines."],
+["wings","laterales del escenario","Theatre","🎭","The stage manager waited in the wings."],
+["front of house","zona de atención al público","Theatre","🎫","Front-of-house staff help theatre-goers."],
+["box office","taquilla","Theatre","🎟️","Tickets are available at the box office."],
+["theatre-goer","aficionado/a al teatro","Theatre","👥","Theatre-goers queued for tickets."],
+["foyer","vestíbulo","Theatre","🚪","The audience gathered in the foyer."],
+["usher","acomodador/a","Theatre","🧑‍💼","An usher showed us to our seats."],
+["behind the scenes","entre bastidores / detrás de escena","Theatre","🎬","A lot of work happens behind the scenes."],
+["abstract","abstracto/a","Visual Arts","🌀","Abstract art does not represent reality naturally."],
+["collage","collage","Visual Arts","🖼️","A collage uses pieces of paper or fabric."],
+["easel","caballete","Visual Arts","🎨","The artist placed the canvas on an easel."],
+["kiln","horno para cerámica","Visual Arts","🏺","Potters bake their work in a kiln."],
+["masterpiece","obra maestra","Visual Arts","🖼️","The painting is considered a masterpiece."],
+["mosaic","mosaico","Visual Arts","🔷","Romans created beautiful mosaics."],
+["mural","mural","Visual Arts","🧱","The artist painted a mural on the wall."],
+["palette","paleta","Visual Arts","🎨","The painter mixed colours on a palette."],
+["perspective","perspectiva","Visual Arts","📐","Perspective creates the illusion of distance."],
+["sketch","boceto","Visual Arts","✏️","She made a quick pencil sketch."],
+["gripping","cautivador/a / apasionante","Adjectives","🔥","It is a gripping crime drama."],
+["critical","crítico/a","Adjectives","📰","The film received critical acclaim."],
+["audible","audible","Adjectives","🔊","Her whisper was barely audible."],
+["catchy","pegadizo/a","Adjectives","🎵","That song has a catchy tune."],
+["fictional","ficticio/a","Adjectives","📖","Sherlock Holmes is a fictional detective."],
+["artistic","artístico/a","Adjectives","🎨","She has real artistic flair."],
+["riveting","fascinante / absorbente","Adjectives","✨","She gave a riveting performance."],
+["visual","visual","Adjectives","👁️","Painting belongs to the visual arts."],
+["screening","proyección","Film & TV","📽️","There is a screening at the cinema tonight."],
+["streaming","transmisión en línea","Film & TV","📱","Streaming gives access to content on demand."],
+["overrated","sobrevalorado/a","Adjectives","📉","I think the film is overrated."],
+["outstanding","sobresaliente / excepcional","Adjectives","🌟","She gave an outstanding performance."],
+["hue","tono / matiz de color","Visual Arts","🌈","Green and blue are the dominant hues."],
+["pigment","pigmento","Visual Arts","🎨","Artists use pigments to create colours."],
+["contemporary","contemporáneo/a","Adjectives","🩰","She enjoys contemporary dance."],
+["progressive","progresivo/a","Adjectives","🎸","He listens to progressive rock."],
+["nomination","nominación","Film & TV","🏆","The actor received an Oscar nomination."],
+["award","premio","Film & TV","🏆","She won an important award."],
+["act","actuar","Word Forms","🎭","She acted in a musical."],
+["play a part","interpretar un papel","Expressions","🎭","Jamie played the part of Scrooge."],
+["narrate","narrar","Word Forms","🗣️","She narrates the documentary."],
+["narrator","narrador/a","Word Forms","🎙️","The story has several narrators."],
+["narration","narración","Word Forms","📖","The narration is clear and engaging."],
+["narrative","narrativa / narrativo","Word Forms","📚","The film has a complex narrative."],
+["inspire","inspirar","Word Forms","💡","Great art can inspire people."],
+["inspiration","inspiración","Word Forms","✨","Her teacher was an inspiration."],
+["inspiring","inspirador/a","Word Forms","🌟","It was an inspiring performance."],
+["orchestrate","orquestar","Word Forms","🎼","The composer orchestrated the piece."],
+["orchestration","orquestación","Word Forms","🎻","The orchestration is impressive."],
+["orchestral","orquestal","Word Forms","🎻","They performed an orchestral version."],
+["depict","representar / retratar","Word Forms","🖼️","The painting depicts ballet dancers."],
+["depiction","representación / retrato","Word Forms","🖼️","The depiction is remarkably realistic."],
+["broadcast","transmitir / emisión","Film & TV","📡","The show is broadcast every Sunday."],
+["broadcaster","locutor/a / empresa de radiodifusión","Word Forms","📺","The broadcaster announced a new series."],
+["broadcasting","radiodifusión","Word Forms","📡","She works in broadcasting."],
+["rehearse","ensayar","Word Forms","🎭","The actors rehearse every afternoon."],
+["rehearsal","ensayo","Word Forms","🎬","The rehearsal starts at six."],
+["rehearsed","ensayado/a","Word Forms","🗣️","His speech sounded rehearsed."],
+["authenticate","autenticar / verificar autenticidad","Word Forms","🔎","Experts authenticated the painting."],
+["authenticity","autenticidad","Word Forms","✅","Experts questioned its authenticity."],
+["authentic","auténtico/a","Adjectives","✅","The artwork is authentic."],
+["adapt","adaptar","Word Forms","🔄","They adapted the novel for cinema."],
+["adaptation","adaptación","Film & TV","🎬","The film is an adaptation of a novel."],
+["adaptable","adaptable","Adjectives","🔄","The format is highly adaptable."],
+["finale","final / número final","Film & TV","🎆","The finale was spectacular."],
+["premiere","estreno","Film & TV","🎬","The premiere attracted many celebrities."],
+["rerun","reposición / repetición","Film & TV","🔁","My mother dislikes TV reruns."],
+["subtitled","subtitulado/a","Film & TV","💬","I prefer subtitled foreign films."],
+["dubbed","doblado/a","Film & TV","🗣️","The movie was dubbed into Spanish."],
+["footage","metraje / imágenes grabadas","Film & TV","🎥","The documentary includes original footage."],
+["credits","créditos","Film & TV","🎞️","We watched the credits at the end."],
+["ratings","índices de audiencia","Film & TV","📊","The programme achieved high ratings."],
+["primetime","horario de máxima audiencia","Film & TV","🕘","The interview aired in primetime."],
+["commercials","anuncios publicitarios","Film & TV","📺","Commercials interrupted the film."],
+["sequel","secuela","Film & TV","2️⃣","The sequel was released years later."],
+["sitcom","comedia de situación","Film & TV","😂","Friends is a famous sitcom."],
+["critical acclaim","aclamación de la crítica","Film & TV","🌟","The show received critical acclaim."],
+["on stage","en el escenario","Expressions","🎭","The actors lined up on stage."],
+["in character","metido/a en el personaje","Expressions","🎭","He stays in character between scenes."],
+["out of sight","fuera de la vista","Expressions","🙈","The director remained out of sight."],
+["by heart","de memoria","Expressions","🧠","You need to know your lines by heart."],
+["out of tune","desafinado/a","Expressions","🎵","Someone was singing out of tune."],
+["in unison","al unísono","Expressions","🎶","The choir sang in perfect unison."],
+["from memory","de memoria","Expressions","🧠","She delivered the speech from memory."],
+["in costume","disfrazado/a / con vestuario","Expressions","👗","The actors improvised while in costume."],
+["be on someone","pagar / invitar alguien","Expressions","💳","Lunch is on me."],
+["build bridges","tender puentes / mejorar relaciones","Expressions","🌉","They met to build bridges."],
+["shop till you drop","comprar hasta no poder más","Expressions","🛍️","We shopped till we dropped."],
+["speak to","atraer / resultar atractivo a","Expressions","💬","The idea really speaks to me."],
+["be a blank canvas","ser un lienzo en blanco","Expressions","⬜","The empty room is a blank canvas."],
+["get cold feet","echarse atrás por miedo / ponerse nervioso","Expressions","🥶","He got cold feet before the performance."]
+];
+const $=s=>document.querySelector(s), $$=s=>document.querySelectorAll(s); $('#count').textContent=V.length;
+function cards(){let q=$('#search').value.toLowerCase(),f=$('#filter').value;$('#cards').innerHTML=V.filter(x=>(f==='all'||x[2]===f)&&(`${x[0]} ${x[1]}`.toLowerCase().includes(q))).map(x=>`<article class="card"><div class="icon">${x[3]}</div><div class="cat">${x[2]}</div><div class="word">${x[0]}</div><div class="translation">🇵🇪 ${x[1]}</div><div class="example">${x[4]}</div></article>`).join('')}
+cards();$('#search').addEventListener('input',cards);$('#filter').addEventListener('change',cards);
+$$('.tabs button').forEach(b=>b.addEventListener('click',()=>{$$('.tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');$$('.panel').forEach(x=>x.classList.remove('active'));$('#'+b.dataset.tab).classList.add('active');if(b.dataset.tab==='quiz')newQ();if(b.dataset.tab==='write')newW()}));
+let qi=0,score=0,current=null,locked=false;
+function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+function newQ(){locked=false;current=V[Math.floor(Math.random()*V.length)];qi++;$('#qnum').textContent=`QUESTION ${qi} · SCORE ${score}`;$('#qword').textContent=current[0];$('#qexample').textContent=current[4];$('#feedback').textContent='';$('#bar').style.width=((qi-1)%10)*10+'%';let opts=shuffle([current,...shuffle(V.filter(x=>x!==current)).slice(0,3)]);$('#options').innerHTML=opts.map(x=>`<button class="btn option" data-answer="${encodeURIComponent(x[1])}">${x[1]}</button>`).join('');$$('.option').forEach(b=>b.addEventListener('click',()=>{if(locked)return;locked=true;let ans=decodeURIComponent(b.dataset.answer);if(ans===current[1]){b.classList.add('correct');score++;$('#feedback').textContent='✓ Correct!';$('#feedback').style.color='var(--green)'}else{b.classList.add('wrong');$('#feedback').textContent='✗ Correct answer: '+current[1];$('#feedback').style.color='var(--red)';$$('.option').forEach(o=>{if(decodeURIComponent(o.dataset.answer)===current[1])o.classList.add('correct')})}}))}
+$('#next').addEventListener('click',newQ);
+let wc=null;function newW(){wc=V[Math.floor(Math.random()*V.length)];$('#wprompt').textContent=wc[1];$('#wexample').textContent=wc[4].replace(new RegExp(wc[0].replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'ig'),'_____');$('#winput').value='';$('#wfeedback').textContent='';$('#winput').focus()}
+$('#another').addEventListener('click',newW);$('#check').addEventListener('click',()=>{let a=$('#winput').value.trim().toLowerCase();if(!a){$('#wfeedback').textContent='Write an answer first.';return}if(a===wc[0].toLowerCase()){$('#wfeedback').textContent='✓ Excellent!';$('#wfeedback').style.color='var(--green)'}else{$('#wfeedback').textContent='✗ Answer: '+wc[0];$('#wfeedback').style.color='var(--red)'}});$('#winput').addEventListener('keydown',e=>{if(e.key==='Enter'){$('#check').click()}});
+</script></body></html>
